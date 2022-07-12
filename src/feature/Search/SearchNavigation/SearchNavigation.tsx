@@ -4,9 +4,18 @@ import { Dispatch, SetStateAction } from 'react';
 type SearchNavigationProps = {
     page: number;
     setPage: Dispatch<SetStateAction<number>>;
+    totalElements?: number;
 }
 
-const SearchNavigation: React.FC<SearchNavigationProps> = ({ page, setPage }) => {
+const SearchNavigation: React.FC<SearchNavigationProps> = ({ page, setPage, totalElements }) => {
+    const getNumberOfPages =
+        () => {
+            if (totalElements) {
+                if (totalElements < 30) { return 1 }
+                else if (totalElements % 30 === 0) { return totalElements / 30 }
+                else { return (totalElements / 30) + 1 }
+            }
+        }
 
     return <HStack
         spacing="auto"
@@ -17,9 +26,11 @@ const SearchNavigation: React.FC<SearchNavigationProps> = ({ page, setPage }) =>
         padding="0 32px"
         backgroundColor="white"
         borderTop="1px solid black">
-        <Button onClick={() => setPage(page - 1)}>{"Prev Page"}</Button>
-        <Text>{"caneblu"}</Text>
-        <Button onClick={() => setPage(page + 1)}>{"Next Page"}</Button>
+        <Button onClick={() => setPage(page - 1)} disabled={page === 1}>{"Prev Page"}</Button>
+        <Text>
+            {totalElements && `[${page === 1 ? 1 : (page - 1) * 30} - ${totalElements < 30 ? totalElements : 30 * page}] / ${totalElements}`}
+        </Text>
+        <Button onClick={() => setPage(page + 100)} disabled={page === getNumberOfPages()}>{"Next Page"}</Button>
     </HStack >
 }
 

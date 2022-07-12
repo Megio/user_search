@@ -1,10 +1,14 @@
-import { Box, VStack, Text } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 import { UserResponse } from '../codecs';
 import { UseQueryResult } from "react-query"
+import ErrorComponent from '../../../components/ErrorComponent';
+import UserItemPlaceholder from '../../../components/UserItemPlaceHolder';
+import UserItem from '../../../components/UserItem';
+
 
 
 type SearchResultsProps = {
-    results?: UseQueryResult<UserResponse>;
+    results: UseQueryResult<UserResponse>;
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
@@ -19,30 +23,9 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
         padding="16px 32px"
         backgroundColor="white"
     >
-        {results.isError &&
-            <Text>
-                {'rotto tutto'}
-            </Text>
-        }
-        {results.isLoading &&
-            <Text>
-                {'...caricamento'}
-            </Text>
-        }
-        {results.isSuccess && results.data.items.map((user) =>
-            <Box
-                key={user.id}
-                w="100%"
-                minH="64px"
-                border="1px solid grey"
-                borderRadius="16px"
-                display="flex"
-                flexDirection="row"
-                alignItems="center"
-                padding="16px">
-                {user.login}
-            </Box>
-        )}
+        {results.isError && <ErrorComponent />}
+        {results.isLoading && [1, 2, 3, 4].map((placeholder) => <UserItemPlaceholder placeholder={placeholder} />)}
+        {results.isSuccess && results.data.items.map((user) => <UserItem user={user} />)}
     </VStack >
 }
 

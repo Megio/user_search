@@ -17,9 +17,6 @@ export const getUsers: PaginatedRequest<
                 },
                 paramsSerializer: serializeQueryParams,
             })
-            .then((res) => {
-                console.log('response', res.data);
-                return res.data
-            }),
+            .then((res) => res.data),
             UsersResponseCodec.asDecoder()
         )

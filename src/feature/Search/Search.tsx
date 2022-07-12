@@ -6,15 +6,12 @@ import SearchResults from "./SearchResults"
 import { useQuery } from "react-query"
 import { getUsers } from "./api"
 
-
-
-
 const Search = () => {
     const [page, setPage] = useState(1)
     const [searchParam, setSearchParam] = useState<string>("")
 
     const results = useQuery(
-        ['users', page],
+        [page, searchParam],
         ({ pageParam = page }) => getUsers({ query: searchParam, page: pageParam }),
         {
             refetchOnWindowFocus: false,
@@ -23,9 +20,12 @@ const Search = () => {
     )
 
     return <VStack overflow="hidden" h="100vh" spacing={0}>
-        <SearchBar searchParam={searchParam} setSearchParam={setSearchParam} />
+        <SearchBar setSearchParam={setSearchParam} />
         <SearchResults results={results} />
-        <SearchNavigation page={page} setPage={setPage} />
+        <SearchNavigation
+            page={page}
+            setPage={setPage}
+            totalElements={results.isSuccess ? results.data.total_count : undefined} />
     </VStack >
 }
 

@@ -2,11 +2,10 @@ import { Box, Input, HStack, Button } from "@chakra-ui/react"
 import { Dispatch, SetStateAction, useState } from "react"
 
 type SearchBarProps = {
-    searchParam: string | undefined;
     setSearchParam: Dispatch<SetStateAction<string>>;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ searchParam, setSearchParam }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam }) => {
     const [isSearchActive, setIsSearchActive] = useState(false)
     const [value, setValue] = useState<string>('')
     const handleChange = (event: any) => setValue(event.target.value)
@@ -15,8 +14,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchParam, setSearchParam }) =>
         setIsSearchActive(true);
         setSearchParam(value);
     }
-
-    console.log('query', searchParam)
 
     return <Box
         h={isSearchActive ? "10vh" : "100vh"}
@@ -37,7 +34,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchParam, setSearchParam }) =>
                 backgroundColor="white"
                 variant='outline'
                 value={value}
-                onChange={handleChange} />
+                onChange={handleChange}
+            />
             <Button onClick={handleClick} disabled={value === ""}>{"search"}</Button>
         </HStack>
     </Box>
