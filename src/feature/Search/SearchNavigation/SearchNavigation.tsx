@@ -1,5 +1,6 @@
 import { Button, Text, HStack } from '@chakra-ui/react';
 import { Dispatch, SetStateAction } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type SearchNavigationProps = {
     page: number;
@@ -8,6 +9,8 @@ type SearchNavigationProps = {
 }
 
 const SearchNavigation: React.FC<SearchNavigationProps> = ({ page, setPage, totalElements }) => {
+    const { t } = useTranslation();
+
     const getNumberOfPages =
         () => {
             if (totalElements) {
@@ -26,11 +29,11 @@ const SearchNavigation: React.FC<SearchNavigationProps> = ({ page, setPage, tota
         padding="0 32px"
         backgroundColor="white"
         borderTop="1px solid black">
-        <Button onClick={() => setPage(page - 1)} disabled={page === 1}>{"Prev Page"}</Button>
+        <Button onClick={() => setPage(page - 1)} disabled={page === 1}>{t("common.previous.page")}</Button>
         <Text>
             {totalElements && `[${page === 1 ? 1 : (page - 1) * 30} - ${totalElements < 30 ? totalElements : 30 * page}] / ${totalElements}`}
         </Text>
-        <Button onClick={() => setPage(page + 100)} disabled={page === getNumberOfPages()}>{"Next Page"}</Button>
+        <Button onClick={() => setPage(page + 100)} disabled={page === getNumberOfPages()}>{t("common.next.page")}</Button>
     </HStack >
 }
 

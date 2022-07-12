@@ -1,5 +1,7 @@
 import { Box, Input, HStack, Button } from "@chakra-ui/react"
 import { Dispatch, SetStateAction, useState } from "react"
+import { useTranslation } from "react-i18next";
+
 
 type SearchBarProps = {
     setSearchParam: Dispatch<SetStateAction<string>>;
@@ -9,6 +11,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam }) => {
     const [isSearchActive, setIsSearchActive] = useState(false)
     const [value, setValue] = useState<string>('')
     const handleChange = (event: any) => setValue(event.target.value)
+
+    const { t } = useTranslation();
 
     const handleClick = () => {
         setIsSearchActive(true);
@@ -30,13 +34,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam }) => {
     >
         <HStack spacing="32px" w="100%">
             <Input
-                placeholder="search users"
+                placeholder={t("search.placeholder")}
                 backgroundColor="white"
                 variant='outline'
                 value={value}
                 onChange={handleChange}
             />
-            <Button onClick={handleClick} disabled={value === ""}>{"search"}</Button>
+            <Button onClick={handleClick} disabled={value === ""}>{t("common.search")}</Button>
         </HStack>
     </Box>
 }
