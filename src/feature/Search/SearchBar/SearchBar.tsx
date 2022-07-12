@@ -39,8 +39,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam }) => {
                 variant='outline'
                 value={value}
                 onChange={handleChange}
+                onKeyDown={(e: React.KeyboardEvent) => { if (e.key == 'Enter') return handleClick() }}
             />
-            <Button onClick={handleClick} disabled={value === ""}>{t("common.search")}</Button>
+            <Button onClick={handleClick} disabled={value === ""} minW="128px">{t("common.search")}</Button>
         </HStack>
     </Box>
 }

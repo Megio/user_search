@@ -1,12 +1,7 @@
 import { HStack, SkeletonCircle, SkeletonText } from "@chakra-ui/react"
 
-type UserItemPlaceholder = {
-    placeholder: number
-}
-
-const UserItemPlaceholder: React.FC<UserItemPlaceholder> = ({ placeholder }) => {
+const UserItemPlaceholder = () => {
     return <HStack
-        key={placeholder}
         spacing="32px"
         w="100%"
         minH="64px"

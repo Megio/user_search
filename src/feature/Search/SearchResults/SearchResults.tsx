@@ -24,8 +24,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
         backgroundColor="white"
     >
         {results.isError && <ErrorComponent />}
-        {results.isLoading && [1, 2, 3, 4].map((placeholder) => <UserItemPlaceholder placeholder={placeholder} />)}
-        {results.isSuccess && results.data.items.map((user) => <UserItem user={user} />)}
+        {results.isLoading && [1, 2, 3, 4].map((placeholder) => <UserItemPlaceholder key={placeholder} />)}
+        {results.isSuccess && results.data.items.map((user) => <UserItem key={user.id} user={user} />)}
     </VStack >
 }
 

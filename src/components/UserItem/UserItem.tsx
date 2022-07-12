@@ -7,7 +7,6 @@ type UserItemProps = {
 
 const UserItem: React.FC<UserItemProps> = ({ user }) => {
     return <HStack
-        key={user.id}
         spacing="32px"
         w="100%"
         minH="64px"
