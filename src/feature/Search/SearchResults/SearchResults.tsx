@@ -1,6 +1,13 @@
-import { Box, VStack } from '@chakra-ui/react';
+import { Box, VStack, Text } from '@chakra-ui/react';
+import { UserResponse } from '../codecs';
+import { UseQueryResult } from "react-query"
 
-const SearchResults = () => {
+
+type SearchResultsProps = {
+    results?: UseQueryResult<UserResponse>;
+}
+
+const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
     return <VStack
         spacing="16px"
         overflow="auto"
@@ -12,9 +19,19 @@ const SearchResults = () => {
         padding="16px 32px"
         backgroundColor="white"
     >
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26].map((el) =>
+        {results.isError &&
+            <Text>
+                {'rotto tutto'}
+            </Text>
+        }
+        {results.isLoading &&
+            <Text>
+                {'...caricamento'}
+            </Text>
+        }
+        {results.isSuccess && results.data.items.map((user) =>
             <Box
-                key={el}
+                key={user.id}
                 w="100%"
                 minH="64px"
                 border="1px solid grey"
@@ -23,7 +40,7 @@ const SearchResults = () => {
                 flexDirection="row"
                 alignItems="center"
                 padding="16px">
-                {el}
+                {user.login}
             </Box>
         )}
     </VStack >

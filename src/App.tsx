@@ -1,12 +1,17 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import Search from './feature/Search'
+import { QueryClient, QueryClientProvider } from 'react-query';
+
 
 const App = () => {
+  const queryClient = new QueryClient();
 
   return (
-    <ChakraProvider>
-      <Search />
-    </ChakraProvider>
+    <QueryClientProvider client={queryClient}>
+      <ChakraProvider>
+        <Search />
+      </ChakraProvider>
+    </QueryClientProvider>
   )
 }
 

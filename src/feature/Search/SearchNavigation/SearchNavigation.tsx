@@ -1,6 +1,13 @@
-import { Box, Button, Text, HStack } from '@chakra-ui/react';
+import { Button, Text, HStack } from '@chakra-ui/react';
+import { Dispatch, SetStateAction } from 'react';
 
-const SearchNavigation = () => {
+type SearchNavigationProps = {
+    page: number;
+    setPage: Dispatch<SetStateAction<number>>;
+}
+
+const SearchNavigation: React.FC<SearchNavigationProps> = ({ page, setPage }) => {
+
     return <HStack
         spacing="auto"
         h="8vh"
@@ -10,9 +17,9 @@ const SearchNavigation = () => {
         padding="0 32px"
         backgroundColor="white"
         borderTop="1px solid black">
-        <Button>{"Prev Page"}</Button>
+        <Button onClick={() => setPage(page - 1)}>{"Prev Page"}</Button>
         <Text>{"caneblu"}</Text>
-        <Button>{"Next Page"}</Button>
+        <Button onClick={() => setPage(page + 1)}>{"Next Page"}</Button>
     </HStack >
 }
 
