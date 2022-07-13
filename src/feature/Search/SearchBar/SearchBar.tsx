@@ -19,7 +19,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam, setPage }) => {
         setIsSearchActive(true);
         setPage(1)
         setSearchParam(value);
-
     }
 
     return <Stack
