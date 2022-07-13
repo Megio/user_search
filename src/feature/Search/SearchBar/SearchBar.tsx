@@ -1,5 +1,5 @@
 import { Input, Stack, Button, Image } from '@chakra-ui/react';
-import { Dispatch, SetStateAction, useState } from "react"
+import { Dispatch, SetStateAction, useCallback, useState } from "react"
 import { useTranslation } from "react-i18next";
 
 
@@ -15,11 +15,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam, setPage }) => {
 
     const { t } = useTranslation();
 
-    const handleClick = () => {
+    const handleClick = useCallback(() => {
         setIsSearchActive(true);
         setPage(1)
         setSearchParam(value);
-    }
+    }, [value])
 
     return <Stack
         direction="column"

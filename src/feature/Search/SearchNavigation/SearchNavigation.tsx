@@ -18,7 +18,6 @@ const SearchNavigation: React.FC<SearchNavigationProps> = ({ page, setPage, tota
         }
     }, [totalElements])
 
-    //TODO: check if this could be written in a better way
     // 30 is the default number of item per page for github serach api
     const getNumberOfPages =
         () => {
