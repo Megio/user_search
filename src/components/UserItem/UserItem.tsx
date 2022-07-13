@@ -1,6 +1,6 @@
 import { Stack, Avatar, Text, Link, HStack, Button } from "@chakra-ui/react"
 import axios from "axios"
-import { useState } from "react"
+import { MouseEvent, useState } from "react"
 import { User } from "../../feature/Search/codecs"
 import { StarIcon, TriangleUpIcon } from '@chakra-ui/icons'
 import { useTranslation } from 'react-i18next';
@@ -27,7 +27,7 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
     const { t } = useTranslation()
 
 
-    const handleTellMeMore = async (e: any) => {
+    const handleTellMeMore = async (e: MouseEvent) => {
         e.stopPropagation();
         e.preventDefault();
         setShowInfo(true);
@@ -84,7 +84,7 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
                     </Stack>
                 }
                 {!showInfo &&
-                    <Button backgroundColor="white" variant="outline" onClick={(e: any) => handleTellMeMore(e)}>
+                    <Button backgroundColor="white" variant="outline" onClick={(e: MouseEvent) => handleTellMeMore(e)}>
                         {t("tell.me.more")}
                     </Button>
                 }

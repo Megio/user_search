@@ -4,22 +4,22 @@ import { useTranslation } from "react-i18next";
 
 
 type SearchBarProps = {
-    setSearchParam: Dispatch<SetStateAction<{ query: string }>>;
+    setQuery: Dispatch<SetStateAction<string>>;
     setPage: Dispatch<SetStateAction<number>>;
     initialInputValue: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam, setPage, initialInputValue }) => {
-    const [isSearchActive, setIsSearchActive] = useState(initialInputValue !== "" ? true : false)
+const SearchBar: React.FC<SearchBarProps> = ({ setQuery, setPage, initialInputValue }) => {
+    const [isSearchActive, setIsSearchActive] = useState(true)
     const [value, setValue] = useState<string>(initialInputValue)
     const handleChange = (event: any) => setValue(event.target.value)
-
+    console.log('initrial', initialInputValue)
     const { t } = useTranslation();
 
     const handleClick = useCallback(() => {
-        setIsSearchActive(true);
+        // setIsSearchActive(true);
         setPage(1)
-        setSearchParam({ query: value });
+        setQuery(value);
     }, [value])
 
     return <Stack
@@ -47,7 +47,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam, setPage, initialI
                 onChange={handleChange}
                 onKeyDown={(e: React.KeyboardEvent) => { if (e.key == 'Enter') return handleClick() }}
             />
-            <Button onClick={handleClick} disabled={value === ""} minW="128px">{t("common.search")}</Button>
+            <Button onClick={handleClick} minW="128px">{t("common.search")}</Button>
         </Stack>
     </Stack>
 }
