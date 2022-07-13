@@ -1,7 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import Search from './feature/Search'
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom'
 
 
 const App = () => {
@@ -12,7 +12,8 @@ const App = () => {
       <ChakraProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Search />} />
+            <Route path="/" element={<Navigate to="/users" />} />
+            <Route path="/users" element={<Search />} />
           </Routes>
         </BrowserRouter>
       </ChakraProvider>

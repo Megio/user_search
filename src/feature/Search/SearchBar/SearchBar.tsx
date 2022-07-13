@@ -4,13 +4,14 @@ import { useTranslation } from "react-i18next";
 
 
 type SearchBarProps = {
-    setSearchParam: Dispatch<SetStateAction<string>>;
+    setSearchParam: Dispatch<SetStateAction<{ query: string }>>;
     setPage: Dispatch<SetStateAction<number>>;
+    initialInputValue: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam, setPage }) => {
-    const [isSearchActive, setIsSearchActive] = useState(false)
-    const [value, setValue] = useState<string>('')
+const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam, setPage, initialInputValue }) => {
+    const [isSearchActive, setIsSearchActive] = useState(initialInputValue !== "" ? true : false)
+    const [value, setValue] = useState<string>(initialInputValue)
     const handleChange = (event: any) => setValue(event.target.value)
 
     const { t } = useTranslation();
@@ -18,7 +19,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam, setPage }) => {
     const handleClick = useCallback(() => {
         setIsSearchActive(true);
         setPage(1)
-        setSearchParam(value);
+        setSearchParam({ query: value });
     }, [value])
 
     return <Stack

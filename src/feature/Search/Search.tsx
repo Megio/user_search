@@ -5,22 +5,26 @@ import SearchNavigation from "./SearchNavigation"
 import SearchResults from "./SearchResults"
 import { useQuery } from "react-query"
 import { getUsers } from "./api"
+import useSearchQuery from "../../utils/hooks/useSearchQuery"
 
 const Search = () => {
+    const { query, setSearchParams, updateUrlParams } =
+        useSearchQuery({ query: '' });
+
     const [page, setPage] = useState(1)
-    const [searchParam, setSearchParam] = useState<string>("")
 
     const results = useQuery(
-        [page, searchParam],
-        ({ pageParam = page }) => getUsers({ query: searchParam, page: pageParam }),
+        [page, query],
+        ({ pageParam = page }) => getUsers({ query: query, page: pageParam }),
         {
             refetchOnWindowFocus: false,
-            enabled: !!searchParam,
+            onSettled: updateUrlParams,
+            enabled: !!query,
         },
     )
 
     return <Stack direction="column" overflow="hidden" h="100vh" spacing={0}>
-        <SearchBar setSearchParam={setSearchParam} setPage={setPage} />
+        <SearchBar initialInputValue={query} setSearchParam={setSearchParams} setPage={setPage} />
         <SearchResults results={results} />
         <SearchNavigation
             page={page}
