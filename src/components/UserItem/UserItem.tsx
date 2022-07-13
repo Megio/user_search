@@ -1,8 +1,8 @@
 import { Stack, Avatar, Text, Link } from "@chakra-ui/react"
-import axios from "axios"
+// import axios from "axios"
 import { useState } from "react"
 import { User } from "../../feature/Search/codecs"
-import { StarIcon, TriangleUpIcon } from '@chakra-ui/icons'
+// import { StarIcon, TriangleUpIcon } from '@chakra-ui/icons'
 
 type UserItemProps = {
     user: User
@@ -10,27 +10,27 @@ type UserItemProps = {
 
 const UserItem: React.FC<UserItemProps> = ({ user }) => {
     const [isViewed, setIsViewed] = useState(false)
-    const [bio, setBio] = useState<string | undefined>(undefined)
-    const [followers, setFollowers] = useState<number | undefined>(undefined)
-    const [repos, setRepos] = useState<number | undefined>(undefined)
+    // const [bio, setBio] = useState<string | undefined>(undefined)
+    // const [followers, setFollowers] = useState<number | undefined>(undefined)
+    // const [repos, setRepos] = useState<number | undefined>(undefined)
 
 
     // TODO: I don't like this, how can I show user information???
     const handleMouseOver = async () => {
         setIsViewed(true);
-        const userInfo = await axios
-            .get(user.url)
-            .then((res) => res.data)
-        setBio(userInfo.bio)
-        setFollowers(userInfo.followers)
-        setRepos(userInfo.public_repos)
+        // const userInfo = await axios
+        //     .get(user.url)
+        //     .then((res) => res.data)
+        // setBio(userInfo.bio)
+        // setFollowers(userInfo.followers)
+        // setRepos(userInfo.public_repos)
     }
 
     const handleMouseLeave = () => {
         setIsViewed(false)
-        setBio(undefined)
-        setFollowers(undefined)
-        setRepos(undefined)
+        // setBio(undefined)
+        // setFollowers(undefined)
+        // setRepos(undefined)
     }
 
 
@@ -52,11 +52,11 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
         >
             <Avatar name={user.login} src={user.avatar_url} />
             <Text>{user.login}</Text>
-            {bio && <Text as='em' fontSize='sm' flex={1}>{bio}</Text>}
+            {/* {bio && <Text as='em' fontSize='sm' flex={1}>{bio}</Text>}
             <Stack direction="row" spacing="16px" flex={1} justifyContent="flex-end">
-                {followers && <Stack direction="row"><StarIcon w={2} h={2} /><Text>{followers}</Text></Stack>}
-                {repos && <Stack direction="row"><TriangleUpIcon w={2} h={2} /><Text>{repos}</Text></Stack>}
-            </Stack>
+                {followers && <Stack direction="row" alignItems="center"><StarIcon w={2} h={2} /><Text>{followers}</Text></Stack>}
+                {repos && <Stack direction="row" alignItems="center"><TriangleUpIcon w={2} h={2} /><Text>{repos}</Text></Stack>}
+            </Stack> */}
         </Stack >
     </Link >
 }
