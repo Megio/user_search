@@ -12,7 +12,7 @@ const App = () => {
       <ChakraProvider>
         <BrowserRouter>
           <Routes>
-            {/* <Route path="/" element={<Navigate to="/users" />} /> */}
+            <Route path="/" element={<Navigate to="/users" />} />
             <Route path="/users" element={<Search />} />
           </Routes>
         </BrowserRouter>
