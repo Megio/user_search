@@ -4,7 +4,7 @@ const UserItemPlaceholder = () => {
     return <HStack
         spacing="32px"
         w="100%"
-        minH="64px"
+        minH="72px"
         h="64px"
         border="1px solid grey"
         borderRadius="16px"

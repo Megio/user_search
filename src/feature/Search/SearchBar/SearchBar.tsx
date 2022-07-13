@@ -1,4 +1,4 @@
-import { Box, Input, HStack, Button } from "@chakra-ui/react"
+import { Box, Input, HStack, Button, Image, VStack } from '@chakra-ui/react';
 import { Dispatch, SetStateAction, useState } from "react"
 import { useTranslation } from "react-i18next";
 
@@ -19,19 +19,21 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam }) => {
         setSearchParam(value);
     }
 
-    return <Box
+    return <VStack
         h={isSearchActive ? "10vh" : "100vh"}
         w="100vw"
         display="flex"
         alignItems="center"
         justifyContent="center"
         p="0 64px"
+        spacing="32px"
         backgroundColor="white"
         transition="height 350ms ease-out"
         borderBottom={isSearchActive ? "1px solid black" : "none"}
         position="fixed"
         zIndex={2}
     >
+        {!isSearchActive && <Image src='https://www.fillmurray.com/800/200' alt='BillMurray' />}
         <HStack spacing="32px" w="100%">
             <Input
                 placeholder={t("search.placeholder")}
@@ -43,7 +45,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam }) => {
             />
             <Button onClick={handleClick} disabled={value === ""} minW="128px">{t("common.search")}</Button>
         </HStack>
-    </Box>
+    </VStack>
 }
 
 export default SearchBar
