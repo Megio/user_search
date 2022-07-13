@@ -1,5 +1,5 @@
 import { Button, Text, Stack } from '@chakra-ui/react';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 type SearchNavigationProps = {
@@ -10,6 +10,13 @@ type SearchNavigationProps = {
 
 const SearchNavigation: React.FC<SearchNavigationProps> = ({ page, setPage, totalElements }) => {
     const { t } = useTranslation();
+    const [total, setTotal] = useState<number | undefined>(undefined)
+
+    useEffect(() => {
+        if (totalElements) {
+            setTotal(totalElements)
+        }
+    }, [totalElements])
 
     //TODO: check if this could be written in a better way
     // 30 is the default number of item per page for github serach api
@@ -35,7 +42,7 @@ const SearchNavigation: React.FC<SearchNavigationProps> = ({ page, setPage, tota
         alignItems="center">
         <Button onClick={() => setPage(page - 1)} disabled={page === 1} minW={["100px", "128px"]}>{t("common.previous.page")}</Button>
         <Text>
-            {totalElements && `[${page === 1 ? 1 : (page - 1) * 30} - ${totalElements < 30 ? totalElements : 30 * page}] / ${totalElements}`}
+            {total && `[${page === 1 ? 1 : (page - 1) * 30} - ${total < 30 ? total : 30 * page}] / ${total}`}
         </Text>
         <Button onClick={() => setPage(page + 1)} disabled={page === getNumberOfPages()} minW={["100px", "128px"]}>{t("common.next.page")}</Button>
     </Stack>
