@@ -5,9 +5,10 @@ import { useTranslation } from "react-i18next";
 
 type SearchBarProps = {
     setSearchParam: Dispatch<SetStateAction<string>>;
+    setPage: Dispatch<SetStateAction<number>>;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam, setPage }) => {
     const [isSearchActive, setIsSearchActive] = useState(false)
     const [value, setValue] = useState<string>('')
     const handleChange = (event: any) => setValue(event.target.value)
@@ -16,7 +17,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam }) => {
 
     const handleClick = () => {
         setIsSearchActive(true);
+        setPage(1)
         setSearchParam(value);
+
     }
 
     return <Stack

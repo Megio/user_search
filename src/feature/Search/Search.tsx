@@ -20,13 +20,13 @@ const Search = () => {
     )
 
     return <Stack direction="column" overflow="hidden" h="100vh" spacing={0}>
-        <SearchBar setSearchParam={setSearchParam} />
+        <SearchBar setSearchParam={setSearchParam} setPage={setPage} />
         <SearchResults results={results} />
         <SearchNavigation
             page={page}
             setPage={setPage}
             totalElements={results.isSuccess ? results.data.total_count : undefined} />
-    </Stack >
+    </Stack>
 }
 
 export default Search
