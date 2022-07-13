@@ -1,4 +1,4 @@
-import { Box, Input, HStack, Button, Image, VStack } from '@chakra-ui/react';
+import { Input, Stack, Button, Image } from '@chakra-ui/react';
 import { Dispatch, SetStateAction, useState } from "react"
 import { useTranslation } from "react-i18next";
 
@@ -19,14 +19,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam }) => {
         setSearchParam(value);
     }
 
-    return <VStack
-        h={isSearchActive ? "10vh" : "100vh"}
+    return <Stack
+        direction="column"
+        h={[isSearchActive ? "15vh" : "100vh", isSearchActive ? "10vh" : "100vh"]}
         w="100vw"
         display="flex"
         alignItems="center"
         justifyContent="center"
-        p="0 64px"
-        spacing="32px"
+        p={["0 16px", "0 64px"]}
+        spacing={"32px"}
         backgroundColor="white"
         transition="height 350ms ease-out"
         borderBottom={isSearchActive ? "1px solid black" : "none"}
@@ -34,7 +35,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam }) => {
         zIndex={2}
     >
         {!isSearchActive && <Image src='https://www.fillmurray.com/800/200' alt='BillMurray' />}
-        <HStack spacing="32px" w="100%">
+        <Stack direction={["column", "row"]} spacing={["8px", "32px"]} w="100%">
             <Input
                 placeholder={t("search.placeholder")}
                 backgroundColor="white"
@@ -44,8 +45,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchParam }) => {
                 onKeyDown={(e: React.KeyboardEvent) => { if (e.key == 'Enter') return handleClick() }}
             />
             <Button onClick={handleClick} disabled={value === ""} minW="128px">{t("common.search")}</Button>
-        </HStack>
-    </VStack>
+        </Stack>
+    </Stack>
 }
 
 export default SearchBar

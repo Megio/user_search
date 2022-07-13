@@ -1,7 +1,8 @@
-import { HStack, SkeletonCircle, SkeletonText } from "@chakra-ui/react"
+import { Stack, SkeletonCircle, SkeletonText } from "@chakra-ui/react"
 
 const UserItemPlaceholder = () => {
-    return <HStack
+    return <Stack
+        direction="row"
         spacing="32px"
         w="100%"
         minH="72px"
@@ -14,7 +15,7 @@ const UserItemPlaceholder = () => {
         padding="16px">
         <SkeletonCircle size='12' />
         <SkeletonText noOfLines={1} w="200px" />
-    </HStack>
+    </Stack>
 }
 
 export default UserItemPlaceholder

@@ -1,4 +1,4 @@
-import { Button, Text, HStack } from '@chakra-ui/react';
+import { Button, Text, Stack } from '@chakra-ui/react';
 import { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -22,21 +22,23 @@ const SearchNavigation: React.FC<SearchNavigationProps> = ({ page, setPage, tota
             }
         }
 
-    return <HStack
+    return <Stack
         spacing="auto"
         h="8vh"
         w="100vw"
         position="fixed"
         bottom={0}
-        padding="0 32px"
+        p={["0 16px", "0 32px"]}
         backgroundColor="white"
-        borderTop="1px solid black">
-        <Button onClick={() => setPage(page - 1)} disabled={page === 1} minW="128px">{t("common.previous.page")}</Button>
+        borderTop="1px solid black"
+        direction="row"
+        alignItems="center">
+        <Button onClick={() => setPage(page - 1)} disabled={page === 1} minW={["100px", "128px"]}>{t("common.previous.page")}</Button>
         <Text>
             {totalElements && `[${page === 1 ? 1 : (page - 1) * 30} - ${totalElements < 30 ? totalElements : 30 * page}] / ${totalElements}`}
         </Text>
-        <Button onClick={() => setPage(page + 100)} disabled={page === getNumberOfPages()} minW="128px">{t("common.next.page")}</Button>
-    </HStack >
+        <Button onClick={() => setPage(page + 1)} disabled={page === getNumberOfPages()} minW={["100px", "128px"]}>{t("common.next.page")}</Button>
+    </Stack>
 }
 
 export default SearchNavigation

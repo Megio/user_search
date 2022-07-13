@@ -1,4 +1,4 @@
-import { HStack, Avatar, Text, Link } from "@chakra-ui/react"
+import { Stack, Avatar, Text, Link } from "@chakra-ui/react"
 import axios from "axios"
 import { useState } from "react"
 import { User } from "../../feature/Search/codecs"
@@ -35,7 +35,8 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
 
 
     return <Link href={user.html_url} isExternal w="100%" _hover={{ tetxDecoration: "none" }}>
-        <HStack
+        <Stack
+            direction="row"
             spacing="32px"
             w="100%"
             minH="72px"
@@ -52,11 +53,11 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
             <Avatar name={user.login} src={user.avatar_url} />
             <Text>{user.login}</Text>
             {bio && <Text as='em' fontSize='sm' flex={1}>{bio}</Text>}
-            <HStack spacing="16px" flex={1} justifyContent="flex-end">
-                {followers && <HStack><StarIcon w={2} h={2} /><Text>{followers}</Text></HStack>}
-                {repos && <HStack><TriangleUpIcon w={2} h={2} /><Text>{repos}</Text></HStack>}
-            </HStack>
-        </HStack >
+            <Stack direction="row" spacing="16px" flex={1} justifyContent="flex-end">
+                {followers && <Stack direction="row"><StarIcon w={2} h={2} /><Text>{followers}</Text></Stack>}
+                {repos && <Stack direction="row"><TriangleUpIcon w={2} h={2} /><Text>{repos}</Text></Stack>}
+            </Stack>
+        </Stack >
     </Link >
 }
 

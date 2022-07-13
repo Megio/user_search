@@ -2,5 +2,6 @@
     "common.search": "Search",
     "common.previous.page": "Prev Page",
     "common.next.page": "Next Page",
-    "search.placeholder": "Search users"
+    "search.placeholder": "Search users",
+    "common.error": "Ops, something went wrong"
 }

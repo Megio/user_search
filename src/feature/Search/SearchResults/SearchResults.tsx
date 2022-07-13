@@ -1,4 +1,4 @@
-import { VStack } from '@chakra-ui/react';
+import { Stack } from '@chakra-ui/react';
 import { UserResponse } from '../codecs';
 import { UseQueryResult } from "react-query"
 import ErrorComponent from '../../../components/ErrorComponent';
@@ -12,21 +12,22 @@ type SearchResultsProps = {
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
-    return <VStack
+    return <Stack
+        direction="column"
         spacing="16px"
         overflow="auto"
         w="100vw"
-        h="82vh"
+        h={["77vh", "82vh"]}
         display="flex"
         position="absolute"
-        top="10vh"
+        top={["15vh", "10vh"]}
         padding="16px 32px"
         backgroundColor="white"
     >
         {results.isError && <ErrorComponent />}
         {results.isLoading && [1, 2, 3, 4].map((placeholder) => <UserItemPlaceholder key={placeholder} />)}
         {results.isSuccess && results.data.items.map((user) => <UserItem key={user.id} user={user} />)}
-    </VStack >
+    </Stack >
 }
 
 export default SearchResults

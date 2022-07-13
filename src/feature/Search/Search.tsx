@@ -1,4 +1,4 @@
-import { VStack } from "@chakra-ui/react"
+import { Stack } from "@chakra-ui/react"
 import { useState } from "react"
 import SearchBar from "./SearchBar"
 import SearchNavigation from "./SearchNavigation"
@@ -19,14 +19,14 @@ const Search = () => {
         },
     )
 
-    return <VStack overflow="hidden" h="100vh" spacing={0}>
+    return <Stack direction="column" overflow="hidden" h="100vh" spacing={0}>
         <SearchBar setSearchParam={setSearchParam} />
         <SearchResults results={results} />
         <SearchNavigation
             page={page}
             setPage={setPage}
             totalElements={results.isSuccess ? results.data.total_count : undefined} />
-    </VStack >
+    </Stack >
 }
 
 export default Search
