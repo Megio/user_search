@@ -1,36 +1,44 @@
-import { Stack, Avatar, Text, Link } from "@chakra-ui/react"
-// import axios from "axios"
+import { Stack, Avatar, Text, Link, HStack, Button } from "@chakra-ui/react"
+import axios from "axios"
 import { useState } from "react"
 import { User } from "../../feature/Search/codecs"
-// import { StarIcon, TriangleUpIcon } from '@chakra-ui/icons'
+import { StarIcon, TriangleUpIcon } from '@chakra-ui/icons'
+import { useTranslation } from 'react-i18next';
 
 type UserItemProps = {
     user: User
 }
 
+type UserInfo = {
+    bio: string | undefined,
+    followers: string | undefined,
+    repos: string | undefined,
+}
+
 const UserItem: React.FC<UserItemProps> = ({ user }) => {
     const [isViewed, setIsViewed] = useState(false)
-    // const [bio, setBio] = useState<string | undefined>(undefined)
-    // const [followers, setFollowers] = useState<number | undefined>(undefined)
-    // const [repos, setRepos] = useState<number | undefined>(undefined)
+    const [showInfo, setShowInfo] = useState(false)
+    const [userInfo, setUserInfo] = useState<UserInfo>({
+        bio: undefined,
+        followers: undefined,
+        repos: undefined,
+    })
+
+    const { t } = useTranslation()
 
 
-    // TODO: I don't like this, how can I show user information???
-    const handleMouseOver = async () => {
-        setIsViewed(true);
-        // const userInfo = await axios
-        //     .get(user.url)
-        //     .then((res) => res.data)
-        // setBio(userInfo.bio)
-        // setFollowers(userInfo.followers)
-        // setRepos(userInfo.public_repos)
-    }
-
-    const handleMouseLeave = () => {
-        setIsViewed(false)
-        // setBio(undefined)
-        // setFollowers(undefined)
-        // setRepos(undefined)
+    const handleTellMeMore = async (e: any) => {
+        e.stopPropagation();
+        e.preventDefault();
+        setShowInfo(true);
+        const userInfoResponse = await axios
+            .get(user.url)
+            .then((res) => res.data)
+        setUserInfo({
+            bio: userInfoResponse.bio,
+            followers: userInfoResponse.followers,
+            repos: userInfoResponse.public_repos
+        })
     }
 
 
@@ -45,18 +53,42 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
             display="flex"
             flexDirection="row"
             alignItems="center"
+            justifyContent={!showInfo ? "space-between" : "flex-start"}
             padding="16px"
-            backgroundColor={isViewed ? 'gray.100' : "unset"}
-            onMouseOver={handleMouseOver}
-            onMouseLeave={handleMouseLeave}
+            backgroundColor={isViewed ? 'blue.100' : "unset"}
+            onMouseOver={() => setIsViewed(true)}
+            onMouseLeave={() => setIsViewed(false)}
         >
-            <Avatar name={user.login} src={user.avatar_url} />
-            <Text>{user.login}</Text>
-            {/* {bio && <Text as='em' fontSize='sm' flex={1}>{bio}</Text>}
+            <HStack spacing="16px">
+                <Avatar name={user.login} src={user.avatar_url} />
+                <Text>{user.login}</Text>
+            </HStack>
+            {showInfo && userInfo.bio && <Text as='em' fontSize='sm' flex={2}>{userInfo.bio}</Text>}
             <Stack direction="row" spacing="16px" flex={1} justifyContent="flex-end">
-                {followers && <Stack direction="row" alignItems="center"><StarIcon w={2} h={2} /><Text>{followers}</Text></Stack>}
-                {repos && <Stack direction="row" alignItems="center"><TriangleUpIcon w={2} h={2} /><Text>{repos}</Text></Stack>}
-            </Stack> */}
+                {showInfo && userInfo.followers &&
+                    <Stack direction="column" spacing="4px" >
+                        <Text fontSize="xs">{t("user.info.followers")}</Text>
+                        <Stack direction="row" alignItems="center">
+                            <StarIcon w={2} h={2} />
+                            <Text>{userInfo.followers}</Text>
+                        </Stack>
+                    </Stack>
+                }
+                {showInfo && userInfo.repos &&
+                    <Stack direction="column" spacing="4px" >
+                        <Text fontSize="xs">{t("user.info.repos")}</Text>
+                        <Stack direction="row" alignItems="center">
+                            <TriangleUpIcon w={2} h={2} />
+                            <Text>{userInfo.repos}</Text>
+                        </Stack>
+                    </Stack>
+                }
+                {!showInfo &&
+                    <Button backgroundColor="white" variant="outline" onClick={(e: any) => handleTellMeMore(e)}>
+                        {t("tell.me.more")}
+                    </Button>
+                }
+            </Stack>
         </Stack >
     </Link >
 }
