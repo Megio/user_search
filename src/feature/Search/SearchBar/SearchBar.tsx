@@ -10,14 +10,14 @@ type SearchBarProps = {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ setQuery, setPage, initialInputValue }) => {
-    const [isSearchActive, setIsSearchActive] = useState(true)
+    const [isSearchActive, setIsSearchActive] = useState(initialInputValue !== "")
     const [value, setValue] = useState<string>(initialInputValue)
     const handleChange = (event: any) => setValue(event.target.value)
-    console.log('initrial', initialInputValue)
+
     const { t } = useTranslation();
 
     const handleClick = useCallback(() => {
-        // setIsSearchActive(true);
+        setIsSearchActive(true);
         setPage(1)
         setQuery(value);
     }, [value])
@@ -47,7 +47,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setQuery, setPage, initialInputVa
                 onChange={handleChange}
                 onKeyDown={(e: React.KeyboardEvent) => { if (e.key == 'Enter') return handleClick() }}
             />
-            <Button onClick={handleClick} minW="128px">{t("common.search")}</Button>
+            <Button onClick={handleClick} minW="128px" disabled={value === ""}>{t("common.search")}</Button>
         </Stack>
     </Stack>
 }
