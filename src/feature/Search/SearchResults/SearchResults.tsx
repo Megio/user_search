@@ -4,6 +4,7 @@ import { UseQueryResult } from "react-query"
 import ErrorComponent from '../../../components/ErrorComponent';
 import UserItemPlaceholder from '../../../components/UserItemPlaceHolder';
 import UserItem from '../../../components/UserItem';
+import NoResultComponent from '../../../components/NoResultComponent';
 
 const PLACEHOLDER_NUMBER = 4
 
@@ -26,7 +27,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
     >
         {results.isError && <ErrorComponent />}
         {results.isLoading && [...(new Array(PLACEHOLDER_NUMBER)).keys()].map((placeholder) => <UserItemPlaceholder key={placeholder} />)}
-        {results.isSuccess && results.data.items.map((user) => <UserItem key={user.id} user={user} />)}
+        {results.isSuccess && results.data.items.length !== 0 && results.data.items.map((user) => <UserItem key={user.id} user={user} />)}
+        {results.isSuccess && results.data.items.length === 0 && <NoResultComponent />}
     </Stack >
 }
 

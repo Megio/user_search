@@ -40,10 +40,10 @@ const SearchNavigation: React.FC<SearchNavigationProps> = ({ page, setPage, tota
         direction="row"
         alignItems="center">
         <Button fontSize={'sm'} onClick={() => setPage(page - 1)} disabled={page === 1} minW={["100px", "128px"]}>{t("common.previous.page")}</Button>
-        <Text fontSize={['xs', 'sm']}>
+        {totalElements !== 0 && <Text fontSize={['xs', 'sm']}>
             {total && `[${page === 1 ? 1 : (page - 1) * 30} - ${total < 30 ? total : 30 * page}] / ${total}`}
-        </Text>
-        <Button fontSize={'sm'} onClick={() => setPage(page + 1)} disabled={page === getNumberOfPages()} minW={["100px", "128px"]}>{t("common.next.page")}</Button>
+        </Text>}
+        <Button fontSize={'sm'} onClick={() => setPage(page + 1)} disabled={page === getNumberOfPages() || totalElements === 0} minW={["100px", "128px"]}>{t("common.next.page")}</Button>
     </Stack>
 }
 

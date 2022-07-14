@@ -6,5 +6,6 @@
     "common.error": "Ops, something went wrong",
     "user.info.followers": "followers",
     "user.info.repos": "repos",
-    "tell.me.more": "TELL ME MORE"
+    "tell.me.more": "TELL ME MORE",
+    "no.results": "No Result Found"
 }
