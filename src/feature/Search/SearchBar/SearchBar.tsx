@@ -45,9 +45,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ setQuery, setPage, initialInputVa
                 variant='outline'
                 value={value}
                 onChange={handleChange}
-                onKeyDown={(e: React.KeyboardEvent) => { if (e.key == 'Enter') return handleClick() }}
+                onKeyDown={(e: React.KeyboardEvent) => { if (e.key == 'Enter' && value !== "") return handleClick() }}
             />
-            <Button onClick={handleClick} minW="128px" disabled={value === ""}>{t("common.search")}</Button>
+            <Button fontSize={'sm'} onClick={handleClick} minW="128px" disabled={value === ""}>{t("common.search")}</Button>
         </Stack>
     </Stack>
 }

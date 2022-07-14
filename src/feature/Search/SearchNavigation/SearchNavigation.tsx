@@ -39,11 +39,11 @@ const SearchNavigation: React.FC<SearchNavigationProps> = ({ page, setPage, tota
         borderTop="1px solid black"
         direction="row"
         alignItems="center">
-        <Button onClick={() => setPage(page - 1)} disabled={page === 1} minW={["100px", "128px"]}>{t("common.previous.page")}</Button>
-        <Text>
+        <Button fontSize={'sm'} onClick={() => setPage(page - 1)} disabled={page === 1} minW={["100px", "128px"]}>{t("common.previous.page")}</Button>
+        <Text fontSize={['xs', 'sm']}>
             {total && `[${page === 1 ? 1 : (page - 1) * 30} - ${total < 30 ? total : 30 * page}] / ${total}`}
         </Text>
-        <Button onClick={() => setPage(page + 1)} disabled={page === getNumberOfPages()} minW={["100px", "128px"]}>{t("common.next.page")}</Button>
+        <Button fontSize={'sm'} onClick={() => setPage(page + 1)} disabled={page === getNumberOfPages()} minW={["100px", "128px"]}>{t("common.next.page")}</Button>
     </Stack>
 }
 

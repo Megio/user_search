@@ -84,7 +84,7 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
                     </Stack>
                 }
                 {!showInfo &&
-                    <Button backgroundColor="white" variant="outline" onClick={(e: MouseEvent) => handleTellMeMore(e)}>
+                    <Button fontSize={'sm'} display={['none', 'none', 'flex']} backgroundColor="white" variant="outline" onClick={(e: MouseEvent) => handleTellMeMore(e)}>
                         {t("tell.me.more")}
                     </Button>
                 }

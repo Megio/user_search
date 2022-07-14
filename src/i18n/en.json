@@ -1,10 +1,10 @@
 {
-    "common.search": "Search",
-    "common.previous.page": "Prev Page",
-    "common.next.page": "Next Page",
+    "common.search": "SEARCH",
+    "common.previous.page": "PREV",
+    "common.next.page": "NEXT",
     "search.placeholder": "Search users",
     "common.error": "Ops, something went wrong",
     "user.info.followers": "followers",
     "user.info.repos": "repos",
-    "tell.me.more": "tell me more"
+    "tell.me.more": "TELL ME MORE"
 }
