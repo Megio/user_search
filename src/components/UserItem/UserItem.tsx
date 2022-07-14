@@ -1,3 +1,4 @@
+import React from 'react'
 import { Stack, Avatar, Text, Link, HStack, Button } from "@chakra-ui/react"
 import axios from "axios"
 import { MouseEvent, useState } from "react"
@@ -60,7 +61,7 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
             onMouseLeave={() => setIsViewed(false)}
         >
             <HStack spacing="16px">
-                <Avatar name={user.login} src={user.avatar_url} />
+                <Avatar data-testid={user.avatar_url} name={user.login} src={user.avatar_url} />
                 <Text>{user.login}</Text>
             </HStack>
             {showInfo && userInfo.bio && <Text as='em' fontSize='sm' flex={2}>{userInfo.bio}</Text>}
