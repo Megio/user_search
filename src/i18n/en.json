@@ -2,7 +2,7 @@
     "common.search": "SEARCH",
     "common.previous.page": "PREV",
     "common.next.page": "NEXT",
-    "search.placeholder": "Search users",
+    "search.placeholder": "Search github's users",
     "common.error": "Ops, something went wrong",
     "user.info.followers": "followers",
     "user.info.repos": "repos",

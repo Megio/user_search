@@ -37,7 +37,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setQuery, setPage, initialInputVa
         position="fixed"
         zIndex={2}
     >
-        {!isSearchActive && <Image src='https://www.fillmurray.com/800/200' alt='BillMurray' />}
+        {!isSearchActive && <Image src='https://www.fillmurray.com/200/200' alt='BillMurray' />}
         <Stack direction={["column", "row"]} spacing={["8px", "32px"]} w="100%">
             <Input
                 placeholder={t("search.placeholder")}

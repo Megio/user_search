@@ -1,10 +1,10 @@
 import React from 'react';
 import { describe, expect, vi, it } from 'vitest';
-import axios from 'axios'
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import UserItem from './UserItem';
+import axios from 'axios'
 
-axios.get = vi.fn().mockResolvedValueOnce({ bio: "asd", followers: '12', repos: '34' })
+vi.mock('axios', () => ({ default: { get: vi.fn() } }))
 
 const mockedUser = {
     login: "test-login",
@@ -36,12 +36,14 @@ describe('UserItem', () => {
         expect(getByText("tell.me.more")).toBeDefined()
     })
     it('should call get function when tell me more button is pressed', async () => {
+        const mockedResponse = { data: { bio: 'asd', followers: '12', public_repos: "23" } };
+        (axios.get as any).mockResolvedValue(mockedResponse);
         const { getByText } = render(<UserItem user={mockedUser} />);
         const btn = getByText("tell.me.more")
         fireEvent.click(btn)
         await waitFor(() => expect(axios.get).toBeCalled())
-        // await waitFor(() => expect(getByLabelText("asd")).toBeDefined())
-        // await waitFor(() => expect(axios.get).toBeDefined())
-        // await waitFor(() => expect(axios.get).toBeDefined())
+        await waitFor(() => expect(getByText("asd")).toBeDefined())
+        await waitFor(() => expect(getByText("12")).toBeDefined())
+        await waitFor(() => expect(getByText("23")).toBeDefined())
     })
 })
